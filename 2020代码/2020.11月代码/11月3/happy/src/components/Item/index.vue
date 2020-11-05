@@ -1,25 +1,27 @@
 <template>
   <div class="home_container">
     <section>
+      <!-- 头部标签 -->
       <header class="top_tips">
         <span class="num_tip">题目{{ itemNum }}</span>
       </header>
+      <!-- 题目内容 -->
       <div class="item_back item_container_style">
         <div class="item_list_container" v-if="questions.length > 0">
-          <header class="item_title">
-            {{ questions[itemNum - 1].topic_name }}
-          </header>
+          <!-- 题干 -->
+          <header class="item_title">{{ itemTitle }}</header>
+          <!-- 选项 -->
           <ul>
             <li
               class="item_list"
-              v-for="(item, index) in questions[itemNum - 1]"
+              v-for="(item, index) in questions[itemNum - 1].topic_answer"
               :key="item.topic_answer_id"
-              @click="index, item.topic_answer_id"
+              @click="choosed(index, item.topic_answer_id)"
             >
               <span
                 class="option_style"
                 :class="{ has_choosed: chooseNum == index }"
-                >{{ String.formCharCode(65 + index) }}</span
+                >{{ String.fromCharCode(65 + index) }}</span
               >
               <span class="option_detail">{{ item.answer_name }}</span>
             </li>
@@ -31,7 +33,12 @@
         v-if="itemNum < questions.length"
         @click="nextItem"
       ></span>
-      <span class="submit_item button_style" v-else></span>
+      <!-- 提交按钮 -->
+      <span
+        class="submit_item button_style"
+        @click="submitAnwser"
+        v-else
+      ></span>
     </section>
   </div>
 </template>
@@ -39,12 +46,20 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  computed: { ...mapState(["itemNum", "questions"]) },
+  computed: {
+    ...mapState(["itemNum", "questions"]),
+    itemTitle() {
+      return this.questions[this.itemNum - 1].topic_name;
+    }
+  },
   created() {
     this.$store.dispatch("getdata");
   },
   data() {
-    return { chooseNum: null, chooseId: null };
+    return {
+      chooseNum: null,
+      chooseId: null
+    };
   },
   methods: {
     choosed(index, id) {
@@ -52,27 +67,40 @@ export default {
       this.chooseId = id;
     },
     nextItem() {
-      if (this.chooseId != null) {
+      if (this.chooseNum != null) {
         this.chooseNum = null;
-        this.$store.dispatch("choosed", this.chooseId);
+        this.$store.dispatch("addNum", this.chooseId);
       } else {
-        alert("补鞥呢空");
+        alert("你还没有选择答案");
+      }
+    },
+    submitAnwser() {
+      if (this.chooseNum != null) {
+        this.chooseNum = null;
+        this.$store.dispatch("addNum", this.chooseId);
+        this.$router.push("/score");
+      } else {
+        alert("你还没有选择答案");
       }
     }
   }
 };
 </script>
+
 <style lang="scss">
 .next_item {
   background-image: url("/images/2-2.png");
 }
+
 .submit_item {
   background-image: url("/images/3-1.png");
 }
+
 .item_back {
   background-image: url("/images/2-1.png");
   background-size: 100% 100%;
 }
+
 .item_title {
   font-size: 0.65rem;
   color: #fff;

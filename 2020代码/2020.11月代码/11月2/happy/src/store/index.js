@@ -1,47 +1,35 @@
-import { createStore } from "vuex";
-
-// 引入axios
-import axios from "axios";
-
+import {
+  createStore
+} from "vuex";
+import axiso from "axios"
 export default createStore({
   state() {
     return {
-      // 活动周数
-      level: "第一周",
-      // 题号
+      level: '第一周',
       itemNum: 1,
-      // 用户所选答案id的数组
       anwserId: [],
       questions: []
-    };
+    }
   },
   mutations: {
-    // 初始化数据
-    initData(state, payload) {
-      console.log(payload);
-      state.questions = payload.data;
+    indata(state, pady) {
+      state.questions = pady.data
     },
-    remberId(state, payload) {
-      state.anwserId.push(payload);
+    remId(state, pady) {
+      state.anwserId.push(pady)
     },
-    addItemNum(state, payload) {
-      state.itemNum += payload;
+    additemNum(state) {
+      state.itemNum++
     }
   },
   actions: {
-    // 获取数据
-    async getData(context) {
-      let res = await axios.get("/data/question.json");
-      context.commit("initData", res);
+    async getdata(context) {
+      let res = await axiso.get('/data/question.json');
+      context.commit('indata', res)
     },
-    addNum(context, payload) {
-      // 把id存储到anwserId这个数组中
-      context.commit("remberId", payload);
-
-      // 如果itemNum小于questions.length的话 让num自增
-      context.commit("addItemNum", 1);
-
-      console.log(context.state.anwserId)
+    addNum(context, pady) {
+      context.commit("remId", pady);
+      context.commit("additemNum", 1);
     }
   },
   modules: {}
