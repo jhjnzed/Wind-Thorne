@@ -1,25 +1,18 @@
-import { createRouter, createWebHashHistory } from "vue-router";
-
-// 引入Home组件
-// @符号代表src 这是webpack的文件路径的别名(Vue-CLI中的别名)
-// import Home from "../components/Home";
+import {
+  createRouter,
+  createWebHashHistory
+} from "vue-router";
 import Home from "@/components/Home";
-let routes = [
-  // 首页路由
-  {
+
+const routes = [{
     path: "/",
     component: Home
   },
-
-  // 题目路由
   {
-    path: "/item",
+    path: '/item',
     component: () => import("@/components/Item")
-  },
-
-  // 分数路由
-  {
-    path: "/score",
+  }, {
+    path: '/score',
     component: () => import("@/components/Score")
   }
 ];

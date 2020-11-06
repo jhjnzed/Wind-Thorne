@@ -33,11 +33,10 @@
         v-if="itemNum < questions.length"
         @click="nextItem"
       ></span>
-      <!-- 提交按钮 -->
       <span
         class="submit_item button_style"
-        @click="submitAnwser"
         v-else
+        @click="submitAnwser"
       ></span>
     </section>
   </div>
@@ -87,7 +86,12 @@ export default {
 };
 </script>
 
+
 <style lang="scss">
+.home_container {
+  height: 100%;
+  background-image: url("/images/1-1.jpg");
+}
 .next_item {
   background-image: url("/images/2-2.png");
 }

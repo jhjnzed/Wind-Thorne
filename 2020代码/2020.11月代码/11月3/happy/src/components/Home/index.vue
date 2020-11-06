@@ -3,7 +3,7 @@
     <section>
       <!-- 头部标签 -->
       <header class="top_tips">
-        <span class="num_tip">{{ level }}</span>
+        <span class="num_tip"> {{level}}</span>
       </header>
       <!-- 首页内容 -->
       <div>
@@ -14,16 +14,17 @@
   </div>
 </template>
 
+
 <script>
 import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState(["level"])
-  }
+  computed: { ...mapState(["level"]) }
 };
 </script>
 
+
 <style lang="scss">
+
 .top_tips {
   position: absolute;
   height: 7.35rem;

@@ -1,5 +1,6 @@
 <template>
   <div class="score_container">
+    <!-- 分数 -->
     <div class="your_scores_container">
       <header class="your_scores">
         <span class="score_num">{{ score }}</span>
@@ -7,14 +8,13 @@
       </header>
       <div class="result_tip">{{ scoreTips }}</div>
     </div>
-    <div class="share_button" @click="showCover">再拉一次</div>
+
+    <div class="share_button" @click="showCover">再来一次</div>
+
     <div class="share_code">
       <header class="share_header">关注葡萄之家,获取答案.</header>
       <img src="/images/4-4.png" height="212" class="code_img" alt="" />
     </div>
-    <!-- <div class="share_cover" @click="showCover">
-      <img class="share_img" src="/images/5-2.png" alt="" />
-    </div> -->
   </div>
 </template>
 
@@ -23,16 +23,16 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      score: 0, //分数
-      scoreTips: "", //分数提示
-      rightAnswer: [2, 7, 12, 13, 18], //正确答案
+      rightAnswer: [2, 6, 10, 14, 18], //正确答案
       scoreTipsArr: [
         "你说，是不是把知识都还给小学老师了？",
         "还不错，但还需要继续加油哦！",
         "不要嘚瑟还有进步的空间！",
         "智商离爆表只差一步了！",
         "你也太聪明啦，葡萄之家欢迎你！"
-      ]
+      ],
+      score: 0,
+      scoreTips: ""
     };
   },
   computed: { ...mapState(["anwserId"]) },
@@ -83,10 +83,6 @@ export default {
   height: 100%;
   background-image: url("/images/4-1.jpg");
 }
-// body {
-//   background-image: url("/images/4-1.jpg");
-//   padding-top: 1.2rem;
-// }
 .your_scores_container {
   width: 9.7rem;
   height: 9.1rem;
@@ -124,12 +120,12 @@ export default {
 .share_button {
   width: 6.025rem;
   height: 2.4rem;
-  margin: 0.8rem auto 0;
-  // background: url("/images/4-3.png") no-repeat 0.4rem 0;
-  background-color: #a51d31;
-  text-align: center;
   line-height: 2.4rem;
-  background-size: 5.825rem 100%;
+  margin: 0.8rem auto 0;
+  text-align: center;
+  font-size: 1rem;
+  color: yellow;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .share_code {
   width: 5.3rem;
